@@ -21,10 +21,9 @@ def hello():
     profile = dict(session)
     try:
      name = profile['user']['userinfo']['name']
-     profile
      return render_template("home.html", name=name)
     except:
-     return render_template("home.html",name=None) 
+     return render_template("home.html",name="None") 
 
     
 @app.route('/login')
