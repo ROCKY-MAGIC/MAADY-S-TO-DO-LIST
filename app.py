@@ -30,7 +30,7 @@ def hello():
 @app.route('/login')
 def login():
     redirect_uri = url_for('authorize', _external=1)
-    redirect_uri = "https"+redirect_uri[4:]
+    #redirect_uri = "https"+redirect_uri[4:]
     print(redirect_uri)
     return oauth.google.authorize_redirect(redirect_uri)
 
