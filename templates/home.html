@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="static/20230616_144154.png">
     <title>MADDY'S to-do list</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
   </head>
@@ -10,7 +11,9 @@
     {% include 'nav.html' %}
     {% include 'banner.html' %}
     <div class = "container text-center mt-3">
-      <h1>ABOUT</h1>
+      <button onclick="window.location.href='/login'" type="button" class="btn btn-outline-primary">login</button>
+      <h1 class = "mt-3">ABOUT</h1>
+      <h1>HELLO {{name}}</h1>
       <p>
         An online notepad and todo list is a great way to stay organized in your day-to-day life. It’s an easy way to keep track of your tasks, ideas, or notes without having to use paper or a physical notepad. You can easily create a todo list with the click of a button and add tasks as you go along. You can also use it to take notes, make lists, or simply jot down ideas as they come to you. It’s a great way to stay organized and keep everything in one place. With an online notepad, you can also share your lists and notes with others if you choose to do so. You can also find a variety of different templates to use to create your list, or you can customize your own. Online notepads are a great way to keep track of your day-to-day tasks and be more organized.
       </p>
