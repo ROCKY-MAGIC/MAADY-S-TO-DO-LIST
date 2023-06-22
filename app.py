@@ -21,10 +21,12 @@ def hello():
     profile = dict(session)
     try:
      name = profile['user']['userinfo']['name']
-     return render_template("home.html", name=name,links="logout",dynamic="logout")
+     photo = profile['user']['userinfo']['picture']
+
+     return render_template("home.html", name=name,links="logout",dynamic="logout",photo=photo)
     except:
      print(url_for("login"))
-     return render_template("home.html",dynamic="login",links="login",name="None") 
+     return render_template("home.html",dynamic="login",links="login",name="None",photo="static/20230616_144154.png") 
       
 @app.route("/logout")
 def logout ():
