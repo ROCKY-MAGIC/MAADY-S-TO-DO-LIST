@@ -21,9 +21,15 @@ def hello():
     profile = dict(session)
     try:
      name = profile['user']['userinfo']['name']
-     return render_template("home.html", name=name)
+     return render_template("home.html", name=name,links="logout",dynamic="logout")
     except:
-     return render_template("home.html",name="None") 
+     print(url_for("login"))
+     return render_template("home.html",dynamic="login",links="login",name="None") 
+      
+@app.route("/logout")
+def logout ():
+  session.pop("user",None)
+  return redirect ("/")
 
     
 @app.route('/login')
