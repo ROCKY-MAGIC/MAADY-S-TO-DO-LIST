@@ -1,4 +1,4 @@
-run = "clear&&python3 db.py"
+run = "clear&&python3 app.py"
 
 # The primary language of the repl. There can be others, though!
 language = "python3"
