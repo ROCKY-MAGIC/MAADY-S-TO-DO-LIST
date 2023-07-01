@@ -21,38 +21,50 @@
     {% include 'nav.html' %}
     {% include 'banner.html' %}
 
-    <div class = "container mt-3">
+    <div class = "container text-center mt-3">
         <h1 class="mt-3">HELLO {{name}}</h1>
       <h3 class="mt-1">ADD TITLE TO YOUR TO-DO</h3>
+    
       <form action="{{ url_for('add')}}" method="post">
-      <div class="col-md-6">
-        <label class="form-label">TITLE</label>
-        <input class="form-control">
-      </div>
-      <p class = "mt-1">
-         TITLE should be unique and no space at the last
-      </p>
-      <div class = "col-12">
-      <button type="submit" class = "btn btn-primary mt-2">ADD</button>
-      </div>
-    <p>
-        {% for tit in title %} 
-          <div class = "container">
-             <h1>
-               <span class = "lable lable-primary">
-                {{tit}}
-               </span>
-             </h1>
-             
-          </div>
-        {% endfor %}
-    </p>
-    <form action="/logout">
-     
-         <button type="submit" class = "btn btn-outline-primary mb-3">logout</button>
-     
-    </form>
+        <input name="title" class="form-control" placeholder="TITLE should be unique and no space at the last">
+        <button type="submit" class = "btn btn-outline-primary mt-2">ADD</button>
+      </form>
     </div>
+    <div class = "container">
+      {% for tit in title %} 
+          <h1 class = "mt-3 container">
+          <div class = "row">
+            
+            
+               {% if (title[tit]) %}
+              <div class = "col-6 fs-4 h3"><del>
+                {{tit}}
+              </del>
+            </div>
+            <div class = "col-3">
+                <button onclick = "window.location.href='/complete?title={{tit}}'" class = "btn btn-success btn-sm">UNDONE</button>
+            </div>
+               {% else %}
+            <p class = "col-6 fs-4 h3">
+                {{tit}}
+            </p>
+            <div class = "col-3">
+                <button onclick = "window.location.href='/complete?title={{tit}}'" class = "btn btn-warning btn-sm" style = "padding: 5px 18px;">DONE</button>
+            </div>
+               {% endif %}
+            
+            <div class = "col-2 align-self-start">
+             <button class ="btn btn-danger btn-sm" onclick = "window.location.href='/delete?tit={{tit}}'">DELETE</button>
+            </div>
+            
+          </div>
+          </h1>
+      {% endfor %}
+      </div>
+    <div class = "text-center">
+  <button onclick = "window.location.href='/logout'" class = "btn btn-primary mb-3 mt-3">logout</button>
+  </div>
+    {% include "footer.html" %}
   </body>
   
 </html>

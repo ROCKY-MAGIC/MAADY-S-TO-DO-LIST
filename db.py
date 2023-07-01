@@ -8,18 +8,12 @@ engine = create_engine(connection_string,
                        }})
 
 con = engine.connect()
-con.execute(text("SET GLOBAL  time_zone = '+05:30';"))
-
-def viewer(id, title):
-  result = con.execute(
-    text(f"SELECT * FROM {id} WHERE title = '{title}';")).all()
-  print(result)
 
 
 def add_user(id):
   con.execute(
     text(
-      f"CREATE TABLE {id}(title VARCHAR(50) NOT NULL UNIQUE, description varchar(500),created datetime,modified datetime, completed bit,PRIMARY KEY(title));"
+      f"CREATE TABLE {id}(title VARCHAR(50) NOT NULL UNIQUE, description varchar(500),completed bit,PRIMARY KEY(title));"
     ))
 
 
@@ -27,7 +21,7 @@ def add_todo(id, title):
   try:
     con.execute(
       text(
-        f"INSERT INTO {id}(title,created,completed) VALUES('{title}',NOW(),1)")
+        f"INSERT INTO {id}(title,created,completed) VALUES('{title}',0)")
     )
 
   except:
@@ -35,8 +29,11 @@ def add_todo(id, title):
 
 
 def fetch_det(id):
-  det = con.execute(text(f"SELECT title FROM {id};")).all()
-  return det
+  det = con.execute(text(f"SELECT title,completed FROM {id};")).all()
+  fin = {}
+  for i, a in det:
+    fin[i] = bool(a[-1])
+  return fin
 
 
 def access_tit(id):
@@ -46,19 +43,12 @@ def access_tit(id):
 
   except:
     add_user(id)
-    txt = dict(fetch_det(id))
+    txt = fetch_det(id)
     return txt
 
 
-def modify(id, col, txt, title):
-  con.execute(
-    text(
-      f"UPDATE {id} SET {col} = '{txt}',modified = NOW() WHERE title ='{title}'"
-    ))
-  con.execute(text("commit"))
 
-
-def delete(id, title):
+def dele(id, title):
   con.execute(text(f"DELETE FROM {id} WHERE title = '{title}';"))
 
 
@@ -66,35 +56,8 @@ def comp(id, title):
   stat = not bool(
     con.execute(text(
       f"SELECT completed FROM {id} WHERE title = '{title}';")).all()[0][0][-1])
-  print(stat)
-
   con.execute(
     text(f"UPDATE {id} SET completed = {stat} WHERE title = '{title}';"))
+  con.execute(text("commit"))
 
-def conv(t):
-  fin = ""
-  bc = [int(i) for i in t[11:].split(":")]
-  fin += t[:11]
-  
-  bc[0] = bc[0]+5
-  st = not bc[0] >= 24
-  bc[0] = bc[0] if st else bc[0]-24
-  bc[1] = bc[1]+30
-  st = not bc[1] >= 60
-  bc[1] = bc[1] if st else bc[1]-60
-  
-  bc = [str(i) for i in bc]
-  fin += ":".join(bc)+","
-  return fin
-
-def time(id, title):
- fin = ""
- for i in {"created","modified"}:
-  t = str(con.execute(text(f"SELECT {i} FROM {id} WHERE title = '{title}'")).one()[0])
-  
-  try:
-   fin += conv(t)
-  except :
-   return fin
-  return fin
 
