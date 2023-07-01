@@ -24,13 +24,13 @@ oauth.register(
 @app.route("/")
 def hello():
     profile = dict(session)
-  #try:
+  try:
     name = profile['user']['userinfo']['name']
     photo = profile['user']['userinfo']['picture']
     head = profile['id']
     return render_template("mylist.html", name=name, photo=photo, title=head)
 
- # except:
+  except:
     return render_template("home.html", photo="static/20230616_144154.png")
 
 
