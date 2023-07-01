@@ -18,13 +18,13 @@ def add_user(id):
 
 
 def add_todo(id, title):
-  #try:
+  try:
     con.execute(
       text(
-        f"INSERT INTO {id}(title,created,completed) VALUES('{title}',0)")
+        f"INSERT INTO {id}(title,completed) VALUES('{title}',0)")
     )
 
-  #except:
+  except:
     return 0
 
 
