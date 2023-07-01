@@ -4,7 +4,7 @@ import os
 connection_string = os.environ['Conn_str']
 engine = create_engine(connection_string,
                        connect_args={"ssl": {
-                         "ssl_ca": os.environ['doc']
+                         "ssl_ca": "/etc/ssl/cert.pem"
                        }})
 
 con = engine.connect()
