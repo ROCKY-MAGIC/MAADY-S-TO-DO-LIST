@@ -23,7 +23,7 @@ oauth.register(
 
 @app.route("/")
 def hello():
-    profile = dict(session)
+  profile = dict(session)
   try:
     name = profile['user']['userinfo']['name']
     photo = profile['user']['userinfo']['picture']
