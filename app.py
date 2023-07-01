@@ -53,7 +53,7 @@ def logout():
 
 @app.post("/add_todo")
 def add():
-  #try:
+  try:
     profile = dict(session)
     id = profile['user']['userinfo']['email']
     id = id[:id.find("@")]
@@ -61,7 +61,7 @@ def add():
     add_todo(id, title)
     return redirect("/user")
 
-  #except:
+  except:
     return redirect("/home")
 
 
