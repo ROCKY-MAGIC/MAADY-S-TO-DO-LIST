@@ -17,7 +17,7 @@ oauth.register(
   'https://accounts.google.com/.well-known/openid-configuration',
   client_kwargs={
     'scope':
-    'openid profile email https://www.googleapis.com/auth/user.gender.read'
+    'openid profile email'
   })
 
 
