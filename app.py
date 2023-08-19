@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, url_for, redirect, session, request, jsonify
+from flask import Flask, render_template, url_for, redirect, session, request
 from authlib.integrations.flask_client import OAuth
 from db import *
 
